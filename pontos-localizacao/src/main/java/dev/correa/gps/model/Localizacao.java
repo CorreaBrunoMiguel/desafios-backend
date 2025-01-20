@@ -1,10 +1,7 @@
 package dev.correa.gps.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -20,6 +17,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "localizacoes")
 public class Localizacao {
@@ -32,10 +30,10 @@ public class Localizacao {
 	private String nome;
 	
 	@Column(name = "ponto_x", nullable = false, updatable = false)
-	private Integer localizacaoX;
+	private Integer pontoX;
 	
 	@Column(name = "ponto_y", nullable = false, updatable = false)
-	private Integer localizacaoY;
+	private Integer pontoY;
 	
 	@Column(name = "data_criacao", updatable = false)
 	private LocalDate dataCriacao;
