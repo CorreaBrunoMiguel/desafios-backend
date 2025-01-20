@@ -11,4 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface LocalizacaoRepository extends JpaRepository<Localizacao, Long> {
+	
+	boolean existsByNome (String nome);
+	
+	boolean existsByPontoXAndPontoY (Integer pontoX, Integer pontoY);
 }
