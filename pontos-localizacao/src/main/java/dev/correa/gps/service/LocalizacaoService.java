@@ -21,4 +21,6 @@ public interface LocalizacaoService {
 	
 	void remover(Long id);
 	
+	LocalizacaoResponse listarPorProximidade(Integer pontoX, Integer pontoY, Integer distancia);
+	
 }

@@ -11,3 +11,7 @@ Content-Type: application/json
 GET localhost:8080/api/localizacoes
 Content-Type: application/json
 ###
+
+GET localhost:8080/api/localizacoes/proximos/10?pontoX=20&pontoY=10
+Content-Type: application/json
+###

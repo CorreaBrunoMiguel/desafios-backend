@@ -24,4 +24,5 @@ public class LocalizacaoResponse {
 	String mensagem;
 	Localizacao localizacao;
 	List<Localizacao> localizacaoList;
+	List<String> locais;
 }

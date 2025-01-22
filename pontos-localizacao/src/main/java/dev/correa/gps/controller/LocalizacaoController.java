@@ -30,8 +30,15 @@ public class LocalizacaoController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<LocalizacaoResponse>> list () {
+	public ResponseEntity<LocalizacaoResponse> list () {
 		LocalizacaoResponse response = service.buscarTodos();
-		return ResponseEntity.ok(Collections.singletonList(response));
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/proximos/{distancia}")
+	public ResponseEntity<LocalizacaoResponse> proximo (@PathVariable Integer distancia,
+	                                                    @RequestParam Integer pontoX, @RequestParam Integer pontoY) {
+		LocalizacaoResponse response = service.listarPorProximidade(pontoX, pontoY, distancia);
+		return ResponseEntity.ok(response);
 	}
 }

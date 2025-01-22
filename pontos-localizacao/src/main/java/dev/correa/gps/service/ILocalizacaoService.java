@@ -89,4 +89,34 @@ public class ILocalizacaoService implements LocalizacaoService {
 	public void remover (Long id) {
 	
 	}
+	
+	@Override
+	public LocalizacaoResponse listarPorProximidade (Integer pontoX, Integer pontoY, Integer distancia) {
+		int xFinal = pontoX;
+		int yFinal = pontoY;
+		List<Localizacao> listaLocais = repository.findAll();
+		
+		if(!listaLocais.isEmpty()){
+			List<String> resultado = listaLocais.stream()
+					.filter(local -> calcularDistancia(pontoX, pontoY, local.getPontoX(), local.getPontoY()) <= distancia)
+					.map(Localizacao::getNome)
+					.toList();
+			if (!resultado.isEmpty()) {
+				return LocalizacaoResponse.builder()
+						.status(HttpStatus.OK)
+						.locais(resultado)
+						.build();
+			} else {
+				return LocalizacaoResponse.builder()
+						.status(HttpStatus.NOT_FOUND)
+						.mensagem("Nenhum local localizado distante " + distancia + " unidades.")
+						.build();
+			}
+		}
+		return null;
+	}
+	
+	private double calcularDistancia (Integer pontoX, Integer pontoY, Integer pontoX1, Integer pontoY1) {
+		return Math.sqrt(Math.pow(pontoX - pontoX1, 2) + Math.pow(pontoY - pontoY1, 2));
+	}
 }
