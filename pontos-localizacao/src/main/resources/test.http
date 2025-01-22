@@ -1,0 +1,13 @@
+POST localhost:8080/api/localizacoes
+Content-Type: application/json
+
+{
+  "nome": "churrascaria",
+  "pontoX": 28,
+  "pontoY": 2
+}
+###
+
+GET localhost:8080/api/localizacoes
+Content-Type: application/json
+###

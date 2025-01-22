@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  * Author: Bruno Miguel Correa
  * Email: devsistemascorrea@gmail.com
@@ -21,12 +24,14 @@ public class ILocalizacaoService implements LocalizacaoService {
 	
 	@Override
 	public LocalizacaoResponse salvar (LocalizacaoRequest request) {
-		if (validarNome(request.nome())){
-			if (validarLocalizacao(request.pontoX(), request.pontoY())){
+		if (!validarNome(request.nome())){
+			if (!validarLocalizacao(request.pontoX(), request.pontoY())){
 				var novaLocalizacao = Localizacao
 						.builder()
-						.nome(request.nome())
+						.nome(request.nome().toUpperCase())
 						.pontoX(request.pontoX())
+						.pontoY(request.pontoY())
+						.dataCriacao(LocalDate.now())
 						.build();
 				repository.save(novaLocalizacao);
 				return LocalizacaoResponse.builder()
@@ -53,12 +58,16 @@ public class ILocalizacaoService implements LocalizacaoService {
 	}
 	
 	private boolean validarNome (String nome) {
-		return repository.existsByNome(nome);
+		return repository.existsByNomeIgnoreCase(nome);
 	}
 	
 	@Override
 	public LocalizacaoResponse buscarTodos () {
-		return null;
+		List<Localizacao> resultado = repository.findAll();
+		return LocalizacaoResponse.builder()
+				.status(HttpStatus.OK)
+				.localizacaoList(resultado)
+				.build();
 	}
 	
 	@Override
