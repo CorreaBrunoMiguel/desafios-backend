@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: sala-reunioes
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sala_reunioes_db
+    username: spring
+    password: spring
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
