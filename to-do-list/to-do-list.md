@@ -50,7 +50,7 @@ ___
 | RF05 | Listar todas as tarefas do usuário logado. | - O endpoint deve retornar uma lista de tarefas. <br> - Requer token JWT válido. | Alta |
 | RF06 | Obter detalhes de uma tarefa específica. | - O endpoint deve retornar os detalhes da tarefa. <br> - Requer token JWT válido. | Média |
 | RF07 | Atualizar uma tarefa existenete. | - O usuário pode atualizar título, descrição, data de vencimento e status. <br> - Requer token JWT válido. | Alta |
-| RF08 | Excluir uma tarefa. | - A tarefa deve ser removida do banco de dados. | <br> - Requer token JWT válido. | Alta |
+| RF08 | Excluir uma tarefa. | - A tarefa deve ser removida do banco de dados.  <br> - Requer token JWT válido. | Alta |
 
 ___
 
