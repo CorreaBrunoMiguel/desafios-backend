@@ -1,6 +1,6 @@
 # Documento de Requisitos Funcionais (DRF)
 
-1. Visao Geral
+## 1. Visao Geral
 
 Este documento descreve os requisitos funcionai s e nao-funcionais para o desenvolvimento de uma API RESTFUL de
 gerenciamento de tarefas (To-Do-List). A API sera utilizada por um aplicativo web e mobile, permitindo que usuarios
@@ -8,31 +8,31 @@ criem, gerenciem e organizem suas tarefas diarias.
 
 ___
 
-2. Objetivo
+## 2. Objetivo
 
 O objetivo principal desta API e fornecer uma soluçao robusta e segura para o gerenciamento de tarefas, com 
 funcionaliades de CRUD e autenticaçao de usuarios. A API deve ser escalavel, facil manutençao e seguir boas praticas 
 de desenvolvimento.
 
-3. Escopo
+## 3. Escopo
 
-3.1. Funcionalidades Inclusas
+### 3.1. Funcionalidades Inclusas
 
 * Cadastro e autenticação e usuários
 * Gerenciamento de tarefas.
 * Validação de dados e tratamentos de erros.
 * Documentação da API
 
-3.2. Funcionalidades Opcionais
+### 3.2. Funcionalidades Opcionais
 
 * Notificações por e-mail ou push.
 * Compartilhamento de tarefas entre usuários.
 * Integração com calendários externos (Google Calendar, Outlook, etc).
 
 ___
-4. Requisitos Funcionais
+## 4. Requisitos Funcionais
 
-4.1. Módulo de Autenticação
+### 4.1. Módulo de Autenticação
 
 | **ID** | **Descrição** | **Critérios de Aceitação** | **Prioridade** |
 |--------|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|------------|
@@ -42,7 +42,7 @@ ___
 
 ___
 
-4.2.  Módulo de Tarefas
+### 4.2.  Módulo de Tarefas
 
 | **ID** | **Descrição** | **Critérios de Aceitação** | **Prioridade** |
 |--------|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|------------|
@@ -54,7 +54,7 @@ ___
 
 ___
 
-4.3. Módulo de tratamento de Erros
+### 4.3. Módulo de tratamento de Erros
 
 | **ID** | **Descrição** | **Critérios de Aceitação** | **Prioridade** |
 |--------|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|------------|
@@ -63,7 +63,7 @@ ___
 
 ___
 
-5. Requisitos Não Funcionais
+## 5. Requisitos Não Funcionais
   
 | **ID** | **Descrição** | **Critérios de Aceitação** | **Prioridade** |
 |--------|-----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|------------|
@@ -76,7 +76,7 @@ ___
 
 ___
 
-6. Dependências
+## 6. Dependências
 
 * **Banco de Dados**: PostgreSQL
 * **Ferramentas de Desenvolvimento**: InteliJ, Git, JetClient.
@@ -84,7 +84,7 @@ ___
 
 ___
 
-7. Priorização
+## 7. Priorização
 
 | Prioridade | Requisitos | 
 |------------|-----------------------------------------------------------------------|
@@ -93,11 +93,89 @@ ___
 
 ___
 
-8. Consideraçoes Finais
+## 8. Consideraçoes Finais
 
 Este documento deve ser revisado e aprovado pela equipe de desenvolvimento antes do início da implementação. Qualquer mudança nos requisitos deve ser comunicada e documentada formalmente.
 
 # Documento de Arquitetura de Software (DAS)
 
+## 1. Visão Geral
+
+Este documento descreve a arquitetura da aplicação de gerenciamento de tarefas, incluindo tecnologias, padrões de projeto e fluxo de dados.
+
+___
+
+## 2. Tecnologias
+
+   * **Linguagem**: Java 17 ou superior
+   * **Franmework**: Spring Boot 3.x.
+   * **Banco de Dados**: PostgreSQL
+   * **Autenticação**: JWT (Json Web Token)
+   * **Documentação**: Swagger/OpenAPI
+   * **Testes**: JUnit, Mockito
+   * **Versionamento**: Git
+  
+___
+  
+## 3. Diagrama de Arquitetura
+
+  * **Controller**: Recebe as requisições HTTP e retorna as respostas.
+  * **Service**: Contém a lógica de negócio.
+  * **Repository**: Responsável pela interação com o banco de dado.
+  * **Model**: Representa as entidades do banc de dados.
+
+___
+
+## 4. Fluxo de Dados
+
+- O cliente (frontend ou Jetclient) faz uma requisição HTTP para a API
+- O **Controller** recebe a requisição e valida os dados.
+- O **Service** processa a requisição e aplica a lógica de negócio.
+- O **Repository** interage com o banco de ados para persistir ou recuperar dados.
+- O **Controller** retorna a resposta ao cliente.
+
+___
+
+## 5. Estrutura do Projeto
+
+```
+ src/
+├── main/
+│ ├── java/
+│ │ ├── com/
+│ │ │ ├── todolist/
+│ │ │ │ ├── controller/ # Controllers da API
+│ │ │ │ ├── service/ # Lógica de negócio
+│ │ │ │ ├── repository/ # Repositórios (JPA)
+│ │ │ │ ├── model/ # Entidades (JPA)
+│ │ │ │ ├── config/ # Configurações (e.g., segurança)
+│ │ │ │ ├── exception/ # Tratamento de exceções
+│ │ │ │ ├── dto/ # Objetos de transferência de dados
+│ │ │ │ └── TodoListApplication.java # Classe principal
+│ ├── resources/
+│ │ ├── application.properties # Configurações do projeto
+│ │ └── data.sql # Dados iniciais (opcional)
+├── test/
+│ ├── java/
+│ │ ├── com/
+│ │ │ ├── todolist/
+│ │ │ │ ├── controller/ # Testes de controllers
+│ │ │ │ ├── service/ # Testes de serviços
+```
+
+____
+
+## 6. Endpoints da API
+
+| Método HTTP | Endpoint | Descrição |
+|-------|------------------------------------|---------------------------------------------|
+| POST | /api/auth/register | registrar um novo usuário. |
+| POST | /api/auth/login | Autenticar um usuário. |
+| GET | /api/users/me | Obter informações do usuário logado. |
+| POST | /api/tasks | Criar uma nova tarefa. |
+| GET | /api/tasks | Listar todas as tarefas do usuário. |
+| GET | /api/tasks/{id} | Obter detalhes de uma tarefa. |
+| PUT | /api/tasks/{id} | Atualizar tarefa. |
+| DELETE | /api/tasks/{id} | Excluir uma tarefa
 
 
