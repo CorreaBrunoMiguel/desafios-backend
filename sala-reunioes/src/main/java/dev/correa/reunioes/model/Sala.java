@@ -32,7 +32,7 @@ public class Sala {
 	private String nome;
 	
 	@Column(name = "capacidade", nullable = false)
-	private int capacidade;
+	private Integer capacidade;
 	
 	@Column(name = "localizacao", nullable = false)
 	private String localizacao;

@@ -1,0 +1,9 @@
+POST localhost:8080/api/salas
+Content-Type: application/json
+
+{
+  "nome": "Sala Bia Julia",
+  "localizacao": "1º andar",
+  "capacidade": 300
+}
+###
